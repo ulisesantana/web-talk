@@ -1,0 +1,566 @@
+<template id="template-web-presentation">
+  <style>
+     :host {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+
+    @media print {
+       :host {
+        display: block;
+        position: relative;
+      }
+    }
+  </style>
+  <content></content>
+</template>
+
+<script>
+  (function () {
+    var presentationProto = Object.create(HTMLElement.prototype),
+      importDoc = document.currentScript.ownerDocument;
+
+    PresentationData = {
+      slides: [],
+      activeSlide: 0,
+      get slideCount() { return this.slides.length },
+      get activeSlideElement() { return this.slides[this.activeSlide]; },
+      isAnimating: false
+    };
+
+    presentationProto.createdCallback = presentationProtoCreatedCallback;
+    presentationProto.registerSlide = registerSlide;
+    presentationProto.previousSlide = previousSlide;
+    presentationProto.nextSlide = nextSlide;
+    presentationProto.goToSlide = goToSlide;
+    presentationProto.nextStep = nextStep;
+    presentationProto.prevStep = prevStep;
+
+    function presentationProtoCreatedCallback() {
+      // Create PresentationData
+      this.slideData = Object.create(PresentationData);
+
+      // Create ShadowDom
+      var template = importDoc.querySelector('#template-web-presentation');
+      var templateContent = document.importNode(template.content, true);
+      this.createShadowRoot().appendChild(templateContent);
+
+      // Bind onhashchange
+      window.addEventListener("hashchange", function () {
+        this.goToSlide(getSlideNumberFromHash());
+      }.bind(this));
+    }
+
+    function nextStep() {
+      if (this.slideData.activeSlideElement && !this.slideData.activeSlideElement.nextFragment()) {
+        this.nextSlide();
+      }
+    }
+
+    function prevStep() {
+      if (this.slideData.activeSlideElement && !this.slideData.activeSlideElement.previousFragment()) {
+        this.previousSlide();
+      }
+    }
+
+    function registerSlide(slide) {
+      this.slideData.slides.push(slide);
+      this.goToSlide(getSlideNumberFromHash());
+    }
+
+    function previousSlide() {
+      var activeSlide = this.slideData.activeSlide;
+
+      if (activeSlide > 0) {
+        slideToSlide.call(this, activeSlide - 1);
+      }
+    }
+
+    function nextSlide() {
+      var activeSlide = this.slideData.activeSlide;
+
+      if (activeSlide < this.slideData.slideCount - 1) {
+        slideToSlide.call(this, activeSlide + 1);
+      }
+    }
+
+    function goToSlide(number, forward) {
+      var slideData = this.slideData;
+
+      if (slideData.slideCount <= number || slideData.isAnimating) {
+        return;
+      }
+
+      // Animate
+      slideData.isAnimating = true;
+      Promise.all([
+        slideData.slides[slideData.activeSlide].hideSlide(forward),
+        slideData.slides[number].showSlide(forward)
+      ]).then(function () {
+        slideData.isAnimating = false;
+        slideData.activeSlide = number;
+        history.pushState(null, null, '#' + number);
+        dispatchSlideChangedEvent.call(this);
+      }.bind(this));
+    }
+
+    function dispatchSlideChangedEvent() {
+      var total = this.slideData.slides.length;
+      var current = this.slideData.activeSlide;
+      var event = new CustomEvent('SlideChanged', {
+        'detail': { total: total, current: current }
+      });
+      this.dispatchEvent(event);
+    }
+
+    function slideToSlide(number) {
+      this.goToSlide(number, this.slideData.activeSlide < number);
+    }
+
+    function getSlideNumberFromHash() {
+      return parseInt(location.hash.slice(1), 10) || 0;
+    }
+
+    document.registerElement('web-presentation', { prototype: presentationProto });
+  })();
+
+</script>
+
+
+
+<template id="template-web-slide">
+  <style>
+     :host {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background: #FFF;
+      color: #3C3C3C;
+      font-family: sans-serif;
+    }
+
+     :host(.active) {
+      opacity: 1;
+      z-index: 900;
+    }
+
+     :host div#content {
+      box-sizing: border-box;
+      transform-origin: 50% 50% 0;
+      transition: opacity 0.2s ease;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 640px;
+      height: 480px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -240px;
+      margin-left: -320px;
+
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+    }
+
+     :host(.active) div#content {
+      opacity: 1;
+    }
+
+     :host(.on-top) {
+      z-index: 999;
+    }
+
+     :host(.forward-out),
+     :host(.forward-in),
+     :host(.backwards-out),
+     :host(.backwards-in) {
+      -webkit-animation: defaultTransition .007s ease both;
+      animation: defaultTransition .007s ease both;
+    }
+
+    @-webkit-keyframes defaultTransition {
+      from {
+        -webkit-transform: translateX(0);
+      }
+    }
+
+    @keyframes defaultTransition {
+      from {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+      }
+    }
+
+    @media print {
+       :host {
+        display: block;
+        position: relative;
+        top: initial;
+        bottom: initial;
+        left: initial;
+        right: initial;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 65%;
+        transition: none;
+        opacity: 1;
+        page-break-after: always;
+      }
+
+      div#content {
+        zoom: initial !important;
+      }
+
+       ::content [data-enter] {
+        visibility: visible !important;
+      }
+    }
+  </style>
+
+  <div id="content">
+    <content></content>
+  </div>
+</template>
+
+<script>
+  var slideProto = Object.create(HTMLElement.prototype);
+
+  (function () {
+    var transition = {
+      "forward": {
+        "out": "forward-out",
+        "in": "forward-in"
+      },
+      "backwards": {
+        "out": "backwards-out",
+        "in": "backwards-in"
+      }
+    };
+    var outClass = "on-top";
+    var activeClass = "active";
+    var importDoc = document.currentScript.ownerDocument;
+    var template = importDoc.querySelector('#template-web-slide');
+
+    slideProto.createdCallback = slideProtoCreatedCallback;
+    slideProto.attachedCallback = slideProtoAttachedCallback;
+    slideProto.showSlide = showSlide;
+    slideProto.hideSlide = hideSlide;
+    slideProto.nextFragment = nextFragment;
+    slideProto.previousFragment = previousFragment;
+
+    function slideProtoCreatedCallback() {
+      var templateContent = document.importNode(template.content, true);
+      this.createShadowRoot().appendChild(templateContent);
+
+      initFragments.call(this);
+
+      this.parentNode.registerSlide(this);
+    }
+
+    function slideProtoAttachedCallback() {
+      window.addEventListener("resize", resize.bind(this), false);
+      setTimeout(resize.bind(this), 0);
+    }
+
+    function showSlide(forward) {
+      if (forward) {
+        initFragments.call(this);
+      }
+
+      if (forward !== undefined) {
+        this.classList.add(activeClass);
+        this.classList.add(forward ? transition.forward.in : transition.backwards.in);
+        this.addEventListener("webkitAnimationEnd", endAnimationOnNewSlide);
+        return promiseOnEvent("webkitAnimationEnd", this);
+      } else {
+        this.classList.add(activeClass);
+        return Promise.resolve("done");
+      }
+    }
+
+    function hideSlide(forward) {
+      if (forward !== undefined) {
+        this.classList.add(forward ? transition.forward.out : transition.backwards.out);
+        this.classList.add(outClass);
+        this.addEventListener("webkitAnimationEnd", endAnimationOnOldSlide);
+        return promiseOnEvent("webkitAnimationEnd", this);
+      } else {
+        this.classList.remove(activeClass);
+        return Promise.resolve("done");
+      }
+    }
+
+    function promiseOnEvent(eventName, slide) {
+      return new Promise(function (resolve) {
+        slide.addEventListener("webkitAnimationEnd", function (e) {
+          slide.removeEventListener("webkitAnimationEnd", this);
+          resolve(slide);
+        });
+      });
+    }
+
+    function endAnimationOnOldSlide() {
+      this.removeEventListener("webkitAnimationEnd", endAnimationOnOldSlide);
+      this.classList.remove(activeClass);
+      this.classList.remove(transition.forward.out);
+      this.classList.remove(transition.backwards.out);
+      this.classList.remove(outClass);
+    }
+
+    function endAnimationOnNewSlide() {
+      this.removeEventListener("webkitAnimationEnd", endAnimationOnNewSlide);
+      this.classList.remove(transition.forward.in);
+      this.classList.remove(transition.backwards.in);
+    }
+
+    function resize() {
+      var content = this.shadowRoot.getElementById("content"),
+        widthContent = content.offsetWidth,
+        heightContent = content.offsetHeight,
+        xScale = this.offsetWidth / widthContent,
+        yScale = this.offsetHeight / heightContent;
+
+      content.style.zoom = Math.min(xScale, yScale);
+    }
+
+    /**
+     * Fragment
+     */
+    function Fragment(element) {
+      var indexEnter = element.getAttribute('data-enter');
+      var indexExit = element.getAttribute('data-exit');
+
+      this.enter = indexEnter ? parseInt(indexEnter, 10) : undefined;
+      this.exit = indexExit ? parseInt(indexExit, 10) : undefined;
+      this.elem = element;
+
+      if (!this.exit || this.enter < this.exit) {
+        this.hide();
+      }
+    }
+
+    Fragment.prototype.show = function () {
+      this.elem.style.visibility = '';
+    };
+
+    Fragment.prototype.hide = function () {
+      this.elem.style.visibility = 'hidden';
+    };
+
+    /**
+     * FragmentsController
+     */
+    function FragmentsController(root) {
+      this.fragments = [].slice
+        .call(root.querySelectorAll('[data-enter], [data-exit]'))
+        .map(function (element) {
+          return new Fragment(element);
+        });
+
+      this.steps = this.fragments.reduce(getSteps, []);
+      this.currentStep = 0;
+
+      function getSteps(steps, fragment) {
+        if (fragment.enter && steps.indexOf(fragment.enter) === -1) {
+          steps.push(fragment.enter);
+        }
+
+        if (fragment.exit && steps.indexOf(fragment.exit) === 1) {
+          steps.push(fragment.exit);
+        }
+
+        return steps.sort();
+      }
+    }
+
+    FragmentsController.prototype.next = function () {
+      if (this.currentStep === this.steps.length) {
+        return false;
+      }
+
+      this.fragments.filter(this.currentEnterFragments.bind(this)).forEach(this.showFragment);
+      this.fragments.filter(this.currentExitFragments.bind(this)).forEach(this.hideFragment);
+      this.currentStep++;
+      return true;
+    };
+
+    FragmentsController.prototype.previous = function () {
+      if (this.currentStep === 0 || this.currentStep > this.steps.length) {
+        return false;
+      }
+
+      this.currentStep--;
+      this.fragments.filter(this.currentEnterFragments.bind(this)).forEach(this.hideFragment);
+      this.fragments.filter(this.currentExitFragments.bind(this)).forEach(this.showFragment);
+      return true;
+    };
+
+    FragmentsController.prototype.currentEnterFragments = function (fragment) {
+      return fragment.enter === this.steps[this.currentStep];
+    };
+
+    FragmentsController.prototype.currentExitFragments = function (fragment) {
+      return fragment.exit === this.steps[this.currentStep];
+    };
+
+    FragmentsController.prototype.showFragment = function (fragment) {
+      fragment.show();
+    };
+
+    FragmentsController.prototype.hideFragment = function (fragment) {
+      fragment.hide();
+    };
+
+    function initFragments() {
+      this.fragmentCtrl = new FragmentsController(this);
+    }
+
+    function nextFragment() {
+      return this.fragmentCtrl.next();
+    }
+
+    function previousFragment() {
+      return this.fragmentCtrl.previous();
+    }
+
+    document.registerElement('web-slide', { prototype: slideProto });
+  })();
+
+</script>
+
+<template id="template-web-slide-title">
+  <style>
+     :host {
+      background: #03A9F4;
+      color: #FFF;
+    }
+
+     ::content h1 {
+      font-size: 3em;
+    }
+  </style>
+</template>
+
+<script>
+  (function () {
+    var slideTitleProto = Object.create(slideProto),
+      importDoc = document.currentScript.ownerDocument;
+
+    slideTitleProto.createdCallback = slideTitleProtoCreatedCallback;
+
+    function slideTitleProtoCreatedCallback() {
+      slideProto.createdCallback.call(this);
+
+      var template = importDoc.querySelector('#template-web-slide-title');
+      var templateContent = document.importNode(template.content, true);
+      this.shadowRoot.insertBefore(templateContent, this.shadowRoot.querySelector('#content'));
+    }
+
+    document.registerElement('web-slide-title', { prototype: slideTitleProto });
+  })();
+
+</script>
+
+<script>
+  var keyboardControlsProto = Object.create(HTMLElement.prototype);
+
+  keyboardControlsProto.createdCallback = keyboardControlsProtoCreatedCallback;
+
+  function keyboardControlsProtoCreatedCallback() {
+    var keyboardcontrols = this;
+
+    document.onkeydown = function (event) {
+      if ( event.path 
+            && event.path[0].id !== 'sandbox-code' 
+            && event.path[0].nodeName !== 'INPUT' ) {
+        switch (event.keyCode) {
+          case 32:
+          case 34:
+          case 39:
+            keyboardcontrols.parentNode.nextStep();
+            break;
+          case 33:
+          case 37:
+            keyboardcontrols.parentNode.prevStep();
+            break;
+        }
+      }
+    };
+  }
+
+  document.registerElement('web-presentation-keyboardcontrols', { prototype: keyboardControlsProto });
+
+</script>
+
+<template id="template-web-presentation-progress">
+  <style>
+     :host {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    #progress {
+      width: 10%;
+      height: 100%;
+      background: rgba(70, 255, 140, 0.9);
+      transition: width 0.5s;
+    }
+
+    @media print {
+       :host {
+        display: none;
+      }
+    }
+  </style>
+  <div id="progress"></div>
+</template>
+<script>
+  (function () {
+    var progressProto = Object.create(HTMLElement.prototype);
+    var importDoc = document.currentScript.ownerDocument;
+
+    progressProto.createdCallback = progressProtoCreatedCallback;
+
+    function progressProtoCreatedCallback() {
+      var template = importDoc.querySelector('#template-web-presentation-progress');
+      var templateContent = document.importNode(template.content, true);
+      this.createShadowRoot().appendChild(templateContent);
+
+      this.parentNode.addEventListener('SlideChanged', updateProgress.bind(this), false);
+    }
+
+    function updateProgress(e) {
+      var percentage = e.detail.current / (e.detail.total - 1) * 100;
+      this.shadowRoot.getElementById("progress").style.width = percentage + "%";
+    }
+
+    document.registerElement('web-presentation-progress', { prototype: progressProto });
+  })();
+
+</script>

@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hablemos de Web</title>
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+  <link rel="stylesheet" href="css/styles.css" charset="utf-8">
+  <link rel="stylesheet" href="css/helpers.css" charset="utf-8">
+  <link rel="stylesheet" href="css/grid.css" charset="utf-8">
+  <link rel="stylesheet" href="css/transitions.css" media="screen" charset="utf-8">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="import" href="components/web-presentation.html">
+  <link rel="import" href="components/prism.html">
+</head>
+
+<body>
+  <web-presentation>
+    <web-presentation-progress></web-presentation-progress>
+    <web-presentation-keyboardcontrols></web-presentation-keyboardcontrols>
+
+    <!--PORTADA-->
+    <web-slide-title data-transition="moveFromBottom" class="bg" style="background-image:url('img/bg/html-code.jpg');">
+      <h1>Hablemos de web</h1>
+      <h2>Desde la web que tenemos hoy <br>hasta la que está por llegar</h2>
+    </web-slide-title>
+
+    <!--PRESENTACIÓN-->
+    <web-slide data-transition="moveToLeft" class="base">
+      <img class="circle" src="img/ulises.jpg" alt="Ulises">
+      <h2 class="text-center">Ulises Santana</h2>
+      <small class="text-center">Promiscuo tecnológico</small>
+      <div class="row space">
+        <a class="no-decoration" href="https://github.com/ulisesantana" target="_blank">
+            <i class="fa fa-github fa-3x" aria-hidden="true"></i>
+            <small class="text-center">@ulisesantana</small>
+          </a>
+        <a class="no-decoration" href="https://medium.com/@ulisesantana" target="_blank">
+            <i class="fa fa-medium fa-3x" aria-hidden="true"></i>
+            <small class="text-center">@ulisesantana</small>
+          </a>
+        <a class="no-decoration" href="https://twitter.com/ulisesantana" target="_blank">
+            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
+            <small class="text-center">@ulisesantana</small>
+          </a>
+      </div>
+    </web-slide>
+
+    <!-- INTRODUCCIÓN -->
+    <web-slide data-transition="moveToLeft" class="base">
+      <img src="img/berners-lee.jpg" alt="Tim Berners-Lee en 1989">
+      <div class="row">
+        <img data-enter="1" class="square" src="img/logos/gdocs.png" alt="Google Docs">
+        <img data-enter="2" class="square" src="img/logos/youtube.png" alt="YouTube">
+        <img data-enter="3" class="square" src="img/logos/fb.png" alt="Facebook">
+        <img data-enter="4" class="square" src="img/logos/github.png" alt="Github">
+        <img data-enter="5" class="square" src="img/logos/gmaps.png" alt="Google Maps">
+      </div>
+    </web-slide>
+
+
+    <!--ELECTRON & IONIC-->
+    <web-slide data-transition="moveToLeft" class="base">
+      <img src="img/logos/electron.svg" alt="Electron">
+      <img class="space" data-enter="1" src="img/logos/ionic.png" alt="Ionic" style="width: 270px;">
+    </web-slide>
+
+    <!--PWA-->
+    <web-slide data-transition="moveToLeft" class="base">
+      <img src="img/logos/pwa.png" alt="Progressive Web Apps">
+      <div class="row">
+        <h3 data-enter="1">Funcionan offline</h3>
+        <h3 data-enter="2">Rápidas</h3>
+        <h3 data-enter="3">Inmersivas</h3>
+      </div>
+    </web-slide>
+
+    <!--WEB COMPONENTS-->
+    <web-slide id="web-components" data-transition="moveToLeft" class="base">
+      <div class="row">
+        <img src="img/logos/webcomponents.png" alt="Progressive Web Apps">
+        <div class="col">
+          <h3 data-enter="1">Modularizar</h3>
+          <h3 data-enter="2">Reutilizar más código</h3>
+          <h3 data-enter="3">Acelerar el desarrollo</h3>
+        </div>
+      </div>
+      <a class="no-decoration space" data-enter="4" href="https://www.webcomponents.org/">www.webcomponents.org</a>
+    </web-slide>
+
+    <!--CERRANDO INTRODUCCIÓN-->
+    <web-slide data-transition="fall" class="base">
+      <h1>Cómo hemos cambiado</h1>
+      <div class="row">
+        <div data-enter="1">
+          <h3>HTML - 1991</h3>
+          <p>18 etiquetas</p>
+        </div>
+        <div data-enter="2">
+          <h3>HTML5 - 2012</h3>
+          <p>129 etiquetas</p>
+        </div>
+      </div>
+      <img class="space" data-enter="3" src="img/trinity.png" alt="La trinididad de la web">
+    </web-slide>
+
+
+    <!--HTML-->
+    <web-slide-title class="html" data-transition="moveFromBottom">
+      <h1>¿Qué podemos hacer hoy en día con <br>HTML & CSS?</h1>
+      <h2>Pequeños consejos que<br>te ahorrarán varias líneas</h2>
+    </web-slide-title>
+
+    <!--HTML INPUT-->
+    <web-slide data-transition="moveToLeft" class="html">
+      <h2>Optimiza el uso del <code>input[type=file]</code></h2>
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;input type="file" accept="audio/*">
+      </pre>
+    </web-slide>
+
+    <!--HTML A-->
+    <web-slide data-transition="moveToLeft" class="html">
+      <h2>¿Descargar o visualizar?</h2>
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;a href="img/ulises.jpg" target="_blank">VER&lt;/a>
+      </pre>
+    </web-slide>
+
+    <!--HTML DATALIST-->
+    <web-slide data-transition="fadeIn" class="html">
+      <h2>Datalist</h2>
+      <p>Si un <code>input</code> y un <code>select</code> hubieran tenido una noche loca</p>
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;input type="text" list="subjects">
+&lt;datalist id="subjects">
+  &lt;option value="Lenguaje de marcas">&lt;/option>
+  &lt;option value="Desarrollo web en entorno cliente">&lt;/option>
+  &lt;option value="Desarrollo web en entorno servidor">&lt;/option>
+  &lt;option value="Diseño de interfaces web">&lt;/option>
+  &lt;option value="Bases de datos">&lt;/option>
+  &lt;option value="Entornos de desarrollo">&lt;/option>
+  &lt;option value="Programación">&lt;/option>
+&lt;/datalist>
+      </pre>
+    </web-slide>
+
+    <!--HTML DATALIST COLORES-->
+    <web-slide data-transition="moveToLeft" class="html">
+      <h2>Datalist</h2>
+      <p>Si un <code>input</code> y un <code>select</code> hubieran tenido una noche loca</p>
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;input type="color" list="colors" value="#ffff00">
+&lt;datalist id="colors">
+  &lt;option value="#ff0066">&lt;/option>
+  &lt;option value="#ff6600">&lt;/option>
+  &lt;option value="#00ff00">&lt;/option>
+&lt;/datalist>
+      </pre>
+    </web-slide>
+
+    <!--HTML METAINFORMACIÓN-->
+    <web-slide data-transition="fadeIn" class="html">
+      <h2>La metainformación, esa gran olvidada</h2>
+      <pre is="lang-markup" theme="dark">
+&lt;head itemscope itemtype="http://schema.org/Person">
+  &lt;meta charset="utf-8">
+  &lt;meta http-equiv="x-ua-compatible" content="ie=edge">
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
+  &lt;!-- METAINFO -->
+  &lt;title>Ulises Santana | Web Developer&lt;/title>
+  &lt;meta name="Author" content="Ulises Santana" />
+  &lt;meta name="description" content="I'm a web developer from Canary Islands, Spain. I am mainly focused on Node.js and everything related to full stack javascript development.">
+  &lt;meta name="keywords" content="ulises santana, ulisesantana, web developer, developer, software, software developer, javascript, php"/>
+  &lt;meta name="robots" content="index, follow" />
+  &lt;meta name="msvalidate.01" content="453947665841FBB11EFD972217B399EE" />
+  &lt;meta name="Copyright" content="Copyright (c) 2017 Ulises Santana" />
+&lt;/head>
+      </pre>
+    </web-slide>
+
+    <web-slide data-transition="fadeIn" class="html">
+      <pre is="lang-markup" theme="dark">
+&lt;!-- ITEM PROPERTIES -->
+&lt;meta itemprop="name" content="Ulises Santana" />
+&lt;meta itemprop="jobTitle" content="Web Developer" />
+&lt;meta itemprop="description" content="I'm a web developer from Canary Islands, Spain. I am mainly focused on Node.js and everything related to full stack javascript development."/>
+&lt;meta itemprop="knows" content="javascript, php" />
+&lt;meta itemprop="email" content="ulisesantana@gmail.com" />
+&lt;meta itemprop="alternateName" content="ulisesantana" />
+&lt;meta itemprop="follows" content="https://twitter.com/ulisesantana" />
+      </pre>
+    </web-slide>
+
+    <web-slide data-transition="fadeIn" class="html">
+      <pre is="lang-markup" theme="dark">
+&lt;!-- THUMB -->
+&lt;meta property="og:image" content="img/profile.jpg">
+&lt;link itemprop="image" href="img/profile.jpg">
+&lt;meta name="thumbnail" content="img/profile.jpg" />
+&lt;meta property="og:image:width" content="460" />
+&lt;meta property="og:image:height" content="460" />
+&lt;link rel="canonical" href="https://ulisesantana.github.io/">
+&lt;meta property="og:url" content="https://ulisesantana.github.io/">
+&lt;meta property="og:type" content="website">
+      </pre>
+    </web-slide>
+
+    <web-slide data-transition="fadeIn" class="html">
+      <pre is="lang-markup" theme="dark">
+&lt;!-- TWITTER -->
+&lt;meta name="twitter:site" content="@ulisesantana">
+&lt;meta name="twitter:card" content="summary">
+&lt;meta name="twitter:image" content="https://ulisesantana.github.io/img/profile.jpg" />
+&lt;meta name="twitter:title" content="Ulises Santana | Web Developer" />
+&lt;meta name="twitter:description" content="I'm a web developer from Canary Islands, Spain. I am mainly focused on Node.js and everything related to full stack javascript development."/>
+      </pre>
+    </web-slide>
+
+    <web-slide data-transition="fadeIn" class="html">
+      <pre is="lang-markup" theme="dark">
+&lt;!-- BROWSER COLOR -->
+&lt;meta name="theme-color" content="#FF9900">
+&lt;meta name="msapplication-navbutton-color" content="#FF9900">
+&lt;meta name="apple-mobile-web-app-status-bar-style" content="#FF9900">
+&lt;meta name="apple-mobile-web-app-capable" content="yes">      
+      </pre>
+    </web-slide>
+
+    <!--CSS-->
+    <web-slide-title data-transition="moveToLeft" class="css">
+      <h2>CSS Filters</h2>
+      <img class="space" style="width:200px;" src="img/rick-and-morty.jpg">
+    </web-slide-title>
+
+    <!--CSS FILTERS-->
+    <web-slide data-transition="moveToLeft" class="css">
+      <div class="grid">
+        <img class="top-left" src="img/rick-and-morty.jpg" style="filter: blur(5px)" title="Filter: blur">
+        <img class="top-center" src="img/rick-and-morty.jpg" style="filter: brightness(50%)" title="Filter: brightness">
+        <img class="top-right" src="img/rick-and-morty.jpg" style="filter: contrast(50%)" title="Filter: constrast">
+        <img class="center-left" src="img/rick-and-morty.jpg" style="filter: drop-shadow(16px 16px 10px rgba(0,0,0,0.9))" title="Filter: drop-shadow">
+        <img class="center" src="img/rick-and-morty.jpg" style="filter: grayscale(50%)" title="Filter: grayscale">
+        <img class="center-right" src="img/rick-and-morty.jpg" style="filter: hue-rotate(90deg)" title="Filter: hue">
+        <img class="bottom-left" src="img/rick-and-morty.jpg" style="filter: invert(100%)" title="Filter: invert">
+        <img class="bottom-center" src="img/rick-and-morty.jpg" style="filter: opacity(40%)" title="Filter: opacity">
+        <img class="bottom-right" src="img/rick-and-morty.jpg" style="filter: saturate(500%)" title="Filter: saturate">
+      </div>
+    </web-slide>
+
+    <!--CSS FILTERS SANDBOX-->
+    <web-slide data-transition="moveToLeft" class="css">
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;style>
+img{
+  filter: sepia(100%) opacity(75%);
+  width: 200px; height: 200px;
+}
+&lt;/style>
+&lt;img src="img/rick-and-morty.jpg">  
+      </pre>
+    </web-slide>
+
+    <!--CSS FILTERS SANDBOX 2-->
+    <web-slide data-transition="moveToLeft" class="css">
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;style>
+  .btn{
+    width: 100px; height: 25px; margin: 5px; 
+    cursor: pointer;
+    line-height: 1.8;
+    border-radius: 25px; border: 5px solid orange;
+    background-color: #ff6600;
+  }
+  .btn[disabled]{
+    filter: grayscale(100%); cursor: not-allowed;
+  }
+&lt;/style>
+&lt;div class="btn">&lt;small>ACTIVO&lt;/small>&lt;/div>
+&lt;div class="btn" disabled>&lt;small>INACTIVO&lt;/small>&lt;/div>
+      </pre>
+    </web-slide>
+
+    <!--CSS CUSTOM PROPERTIES-->
+    <web-slide data-transition="moveToLeft" class="css">
+      <h2>CSS: Custom properties</h2>
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;style>
+  :host{
+    --text-color: #333;
+    --bg-color: #ff0066;
+  }
+  p{ color: var(--text-color); }
+
+  div{ background-color: var(--bg-color); }
+&lt;/style>
+&lt;div>
+  &lt;p>Gromenagüer&lt;/p>
+&lt;/div>
+      </pre>
+    </web-slide>
+
+    <!--CSS @APPLY-->
+    <web-slide data-transition="moveToLeft" class="css">
+      <pre is="lang-markup" theme="dark" sandbox>
+&lt;style>
+  :host {
+    --banner: {
+      background-color: yellowgreen;
+      border: 1px solid #000;
+      color: yellow;
+    };
+  }
+  .banner { 
+    @apply --banner; 
+  }
+&lt;/style>
+&lt;div class="banner">
+  &lt;h1>Gromenagüer&lt;/h1>
+&lt;/div>
+      </pre>
+    </web-slide>
+
+    <!--CSS GRID-->
+    <web-slide data-transition="fadeIn" class="css">
+      <h2>CSS Grid System</h2>
+      <div class="grid space">
+        <header>header</header>
+        <main>main</main>
+        <aside>aside</aside>
+        <footer>footer</footer>
+      </div>
+      <pre is="lang-css" theme="dark">
+.grid{
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  grid-gap: 5px;
+  grid-template-areas: 
+    "header header header"
+    "main main aside"
+    "footer footer footer";
+}
+      </pre>
+    </web-slide>
+
+    <!--CSS GRID-->
+    <web-slide data-transition="fadeIn" class="css">
+      <h2>CSS Grid System</h2>
+      <div class="grid space">
+        <header>header</header>
+        <main>main</main>
+        <aside>aside</aside>
+        <footer>footer</footer>
+      </div>
+      <div class="row">
+        <pre is="lang-css" theme="dark">
+.grid header {
+  grid-area: header;
+  background: red;
+}
+
+.grid main{
+  grid-area: main;
+  background: orange;
+}
+      </pre>
+        <pre is="lang-css" theme="dark">
+.grid aside{
+  grid-area: aside;
+  background: blue;
+}
+
+.grid footer{
+  grid-area: footer;
+  background: yellowgreen;
+}
+      </pre>
+      </div>
+    </web-slide>
+
+    <!--CSS GRID-->
+    <web-slide data-transition="fall" class="css">
+      <h2>CSS Grid System</h2>
+      <div class="grid space">
+        <header>header</header>
+        <main>main</main>
+        <aside>aside</aside>
+        <footer>footer</footer>
+      </div>
+      <pre is="lang-markup" theme="dark">
+&lt;div class="grid">
+  &lt;header>header&lt;/header>
+  &lt;main>main&lt;/main>
+  &lt;aside>aside&lt;/aside>
+  &lt;footer>footer&lt;/footer>
+&lt;/div>
+      </pre>
+    </web-slide>
+
+    <!--JS-->
+    <web-slide-title class="js" data-transition="moveToLeft">
+      <h1>JavaScript</h1>
+      <h2>El lenguaje más incomprendido del mundo</h2>
+    </web-slide-title>
+
+    <!--JS Historia-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h1>Historia de JavaScript</h1>
+      <div class="row">
+        <div>
+          <h3>1995</h3>
+          <p>Nace Mocha</p>
+        </div>
+        <div>
+          <h3>1997</h3>
+          <p>Estandarización <br>de JavaScript</p>
+        </div>
+        <div>
+          <h3>1998</h3>
+          <p>ES2</p>
+        </div>
+        <div>
+          <h3>1999</h3>
+          <p>ES3</p>
+        </div>
+      </div>
+      <div class="row" data-enter="1">
+        <div>
+          <h3>2002</h3>
+          <p>JSON</p>
+        </div>
+        <div>
+          <h3>2005</h3>
+          <p>AJAX</p>
+        </div>
+        <div>
+          <h3>2009</h3>
+          <p>ES5</p>
+        </div>
+        <div>
+          <h3>2015</h3>
+          <p>ES6/ES2015</p>
+        </div>
+      </div>
+    </web-slide>
+
+    <!--JS características-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h1>Características de JavaScript</h1>
+      <div class="col">
+        <h3 data-enter="1">Tipado dinámico</h3>
+        <h3 data-enter="2">Orientado a objetos basado en prototipos</h3>
+        <h3 data-enter="3">Es el único lenguaje de programación de lado del cliente</h3>
+        <h3 data-enter="4">Asíncrono</h3>
+      </div>
+    </web-slide>
+
+    <!--JS y el DOM-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h1>JavaScript y el DOM</h1>
+      <img class="space" src="img/dom.png" alt="Document Object Model">
+    </web-slide>
+
+    <!--JS y la Web API-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h1>La Web API</h1>
+      <h3 data-enter="1">La batería está al <span id="battery"></span></h3>
+      <script data-enter="1">
+        navigator.getBattery().then(function (battery) {
+          var battery = battery.level * 100 + '%';
+          document.getElementById('battery').innerHTML = battery;
+        });
+
+      </script>
+      <pre is="lang-javascript" theme="dark">
+&lt;h3>La batería está al &lt;span id="battery">&lt;/span>&lt;/h3>
+&lt;script>
+navigator.getBattery().then(function(battery){
+  var level = battery.level * 100 + '%';
+  document.getElementById('battery').innerHTML = level; 
+});
+&lt;/script>
+      </pre>
+    </web-slide>
+
+    <!--JS null-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h1>En Java todo es un objeto</h1>
+      <pre is="lang-javascript" theme="dark" example data-enter="1">
+console.log(typeof null);
+      </pre>
+      <h2 data-enter="2">Bitch please...</h2>
+      <pre is="lang-javascript" theme="dark" data-enter="2">
+> object
+      </pre>
+    </web-slide>
+
+    <!--JS Prototipos-->
+    <web-slide class="js" data-transition="moveToLeft">
+      <h2>Prototipos</h2>
+      <pre is="lang-javascript" theme="dark" example>
+String.prototype.firstUppercase = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+};
+
+console.log('javascript'.firstUppercase());
+      </pre>
+      <pre is="lang-javascript" theme="dark" data-enter="1">
+> Javascript
+      </pre>
+    </web-slide>
+
+    <web-slide class="js" data-transition="moveFromBottom">
+      <h1>Hacia dónde va JavaScript</h1>
+    </web-slide>
+
+    <!--JS hacia donde está yendo -->
+    <web-slide class="js" data-transition="moveToLeft">
+      <img class="no-resize" src="img/github-languages.png" alt="Lenguajes ordenados por repositorios en Github">
+    </web-slide>
+
+    <!--JS hacia donde está yendo -->
+    <web-slide class="js" data-transition="fall">
+      <h2>Lo último en JavaScript</h2>
+      <div class="row space">
+        <img class="square" src="img/logos/es6.png" alt="ECMAScript 6">
+        <img class="square" src="img/logos/typescript.png" alt="TypeScript" data-enter="1">
+        <img class="square" src="img/logos/node.png" alt="NodeJS" data-enter="2">
+      </div>
+    </web-slide>
+
+    <!--NODE-->
+    <web-slide class="node" data-transition="moveToLeft">
+      <img src="img/logos/nodejs-logo.png" alt="NodeJS">
+      <h2>JavaScript del lado del servidor</h2>
+    </web-slide>
+
+    <!--NODE CARACTERÍSTICAS-->
+    <web-slide class="node" data-transition="moveToLeft">
+      <div class="col">
+        <h2>Se mantiene al día de ECMAScript</h2>
+        <h2 data-enter="1">Explota la asincronía de JavaScript</h2>
+        <h2 data-enter="2">Programación orientada a eventos</h2>
+        <h2 data-enter="3">Completamente modular</h2>
+        <h2 data-enter="4">npm</h2>
+      </div>
+    </web-slide>
+
+    <!--NODE Asincronía de JS-->
+    <web-slide class="node" data-transition="moveFromBottom">
+      <h2>La asincronía de JavaScript</h2>
+      <pre is="lang-javascript" theme="dark">
+const fs = require('fs'); 
+
+let text; 
+
+fs.readFile('../test.txt', 'utf8', (err, data) => {
+  if(err) throw err;
+  text = data;
+  console.log('Acabo de terminar de leer' + 
+              'el fichero que contiene: ' + text);
+});
+
+console.log('El contenido del fichero ' + 
+            'de texto es: ' + text);
+      </pre>
+    </web-slide>
+
+    <!--FULLSTACK JS-->
+    <web-slide class="js" data-transition="fall">
+      <h1>Full Stack de JavaScript</h1>
+      <div class="col">
+        <h2>¿En qué consiste?</h2>
+        <img src="img/logos/mean.png" alt="MEAN Stack" data-enter="1">
+        <h2 data-enter="2">¿Por qué con PHP no se considera Full Stack?</h2>
+      </div>
+    </web-slide>
+
+    <!--KENTECH: Historia y qué aprendí-->
+    <web-slide class="base" data-transition="moveToLeft">
+      <h2>Ahora hablemos de cosas menos técnicas y con menos palabros</h2>
+      <small data-enter="1">más o menos...</small>
+      <div class="row space">
+        <h3 data-enter="2">Mis prácticas</h3>
+        <h3 data-enter="3">¿Qué implica ser un programador hoy en día?</h3>
+        <h3 data-enter="4">La actitud es clave</h3>
+      </div>
+      <!-- Qué tipo de empresa es Kentech, cómo trabajan, con qué trabajan y como coño llegue a ahí-->
+      <!-- Qué implica ser un programador hoy en día. Cómo es el sector -->
+      <!-- La actitud es muy importante -->
+    </web-slide>
+
+    <!--RECOMENDACIONES-->
+    <web-slide class="base" data-transition="moveToLeft">
+      <h1>Recomendaciones</h1>
+      <div class="row">
+        <div class="col">
+          <h3 data-enter="1">Ir al menos a un Hackaton</h3>
+          <h3 data-enter="2">Trastear en GitHub</h3>
+          <h3 data-enter="3">Probar GitHb Pages</h3>
+          <h3 data-enter="4">Probar Heroku</h3>
+          <h3 data-enter="5">Probar Firebase</h3>
+        </div>
+        <div class="col" data-enter="6">
+          <a class="no-decoration" href="http://lea.verou.me/">
+          <img src="img/lea.jpg" alt="Lea Verou" class="circle">
+          </a>
+          <h2>Sigue a <a class="no-decoration" href="http://lea.verou.me/">Lea Verou</a></h2>
+        </div>
+      </div>
+    </web-slide>
+
+    <!--RECURSOS-->
+    <web-slide class="base" data-transition="moveFromBottom">
+      <h1>Recursos</h1>
+      <div class="row">
+        <div class="col">
+          <h3>En general</h3>
+          <a class="no-decoration" data-enter="1" href="https://developer.mozilla.org/es/docs/Web">
+            <h4>Mozilla Developer Network</h4>
+          </a>
+          <a class="no-decoration" data-enter="2" href="https://github.com/bolshchikov/programmer-must-see">
+            <h4>Vídeos de Programmer Must See</h4>
+          </a>
+          <a class="no-decoration" data-enter="3" href="https://www.visualstudio.com/es/dev-essentials/?rr=https%3A%2F%2Fwww.google.es%2F">
+            <h4>PluralSight</h4>
+          </a>
+        </div>
+        <div class="col">
+          <h3>Para frontend:</h3>
+          <a class="no-decoration" data-enter="4" href="http://cssgridgarden.com/#es">
+            <h4>Aprende CSS Grid</h4>
+          </a>
+          <a class="no-decoration" data-enter="5" href="http://caniuse.com">
+            <h4>caniuse.com</h4>
+          </a>
+          <a class="no-decoration" data-enter="6" href="https://whatwebcando.today/">
+            <h4>What Web can do today</h4>
+          </a>
+          <a class="no-decoration" data-enter="7" href="https://css-tricks.com">
+            <h4>CSS-TRICKS</h4>
+          </a>
+          <a class="no-decoration" data-enter="8" href="https://developer.chrome.com/devtools">
+            <h4>Dev Tools</h4>
+          </a>
+        </div>
+        <div class="col">
+          <h3>Para JS Lovers:</h3>
+          <a class="no-decoration" data-enter="9" href="https://github.com/getify/You-Dont-Know-JS">
+            <h4>You Don't Know JS, <i>Kyle Simpson</i></h4>
+          </a>
+          <a class="no-decoration" data-enter="9" href="https://github.com/bolshchikov/js-must-watch">
+            <h4>Vídeos de JS Must Watch</h4>
+          </a>
+        </div>
+      </div>
+    </web-slide>
+
+    <!--CIERRE-->
+    <web-slide class="base">
+      <h1>¿Qué duele más?</h1>
+      <h2>¿El dolor del trabajo duro o el dolor del arrepentimiento?</h2>
+    </web-slide>
+
+  </web-presentation>
+
+  <script>
+    document.querySelectorAll('pre[example]').forEach(example => {
+      example.addEventListener('click', e => {
+        copyText(e.target.innerHTML);
+      });
+    });
+
+    function copyText(text) {
+      let textField = document.createElement('textarea');
+      textField.innerText = text;
+      document.body.appendChild(textField);
+      textField.select();
+      document.execCommand('copy');
+      textField.remove();
+    }
+  </script>
+</body>
+
+</html>
