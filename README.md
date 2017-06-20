@@ -2,8 +2,7 @@
 
 Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplicaciones del CIFP Villa de Agüimes en Junio 2017.
 
-**ADVERTENCIA:** La presentación está optimizada para Google Chrome 59 con una resolución de 1366x768 y usando el teclado para moverse entre las diapositivas.
-
+**ADVERTENCIA:** La presentación está optimizada para Google Chrome 59 con una resolución de 1366x768 y usando el teclado para moverse entre las diapositivas. En otras condiciones podría no funcionar correctamente.
 
 ## Recursos
 
