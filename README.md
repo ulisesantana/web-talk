@@ -15,12 +15,7 @@ Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplica
   - [Web Components](http://www.webcomponents.org)
   - [Heroku](https://www.heroku.com/)
   - [Firebase](https://firebase.google.com/)
-  {::nomarkdown}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL" frameborder="0" allowfullscreen></iframe>
-
-
-{:/}
+  - [Vídeos que explican qué es Firebase](https://www.youtube.com/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL)
   
 ### Metadatos
   - [Schema.org](http://schema.org/)
@@ -30,8 +25,7 @@ Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplica
 ### CSS
   - [CSS-TRICKS](https://css-tricks.com/)
   - [Filter](https://css-tricks.com/almanac/properties/f/filter/)
-  - CSS Variables por Lea Verou
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/kZOJCVvyF-4" frameborder="0" allowfullscreen></iframe>
+  - [CSS Variables por Lea Verou](https://www.youtube.com/kZOJCVvyF-4)
   - [Aprende CSS Grid](http://cssgridgarden.com/#es)
   - [A Complete Guide to CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
