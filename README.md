@@ -15,8 +15,13 @@ Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplica
   - [Web Components](http://www.webcomponents.org)
   - [Heroku](https://www.heroku.com/)
   - [Firebase](https://firebase.google.com/)
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL" frameborder="0" allowfullscreen></iframe>
+  {::nomarkdown}
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL" frameborder="0" allowfullscreen></iframe>
+
+
+{:/}
+  
 ### Metadatos
   - [Schema.org](http://schema.org/)
   - [Open Graph](http://ogp.me/)
