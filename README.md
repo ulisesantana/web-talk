@@ -2,7 +2,7 @@
 
 Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplicaciones del CIFP Villa de Agüimes en Junio 2017.
 
-**ADVERTENCIA:** La presentación está optimizada para Google Chrome 59 con una resolución de 1366x768 y usando el teclado para moverse entre las diapositivas. En otras condiciones podría no funcionar correctamente.
+**ADVERTENCIA:** La presentación está optimizada para Google Chrome 59 con una resolución de 1366x768 y usando el teclado para moverse entre las diapositivas. En otras condiciones podría no funcionar correctamente. Además, para ver el resultado de `@apply` en CSS, Chrome necesita tener habilitada la flag *Experimental Web Platform features*
 
 ## Recursos
 
@@ -14,7 +14,8 @@ Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplica
   - [Ejemplo simple de Progressive Web App](http://airhorner.com) (Añadir a pantalla de inicio y usar en modo Avión)
   - [Web Components](http://www.webcomponents.org)
   - [Heroku](https://www.heroku.com/)
-  - [Firebase](https://firebase.google.com/)<iframe width="560" height="315" src="https://www.youtube.com/embed/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL" frameborder="0" allowfullscreen></iframe>
+  - [Firebase](https://firebase.google.com/)
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/iosNuIdQoy8?list=PLl-K7zZEsYLmOF_07IayrTntevxtbUxDL" frameborder="0" allowfullscreen></iframe>
 
 ### Metadatos
   - [Schema.org](http://schema.org/)
@@ -24,7 +25,8 @@ Charla sobre la Web y Prácticas de empresa para alumnos de Desarrollo de Aplica
 ### CSS
   - [CSS-TRICKS](https://css-tricks.com/)
   - [Filter](https://css-tricks.com/almanac/properties/f/filter/)
-  - CSS Variables por Lea Verou<iframe width="560" height="315" src="https://www.youtube.com/embed/kZOJCVvyF-4" frameborder="0" allowfullscreen></iframe>
+  - CSS Variables por Lea Verou
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/kZOJCVvyF-4" frameborder="0" allowfullscreen></iframe>
   - [Aprende CSS Grid](http://cssgridgarden.com/#es)
   - [A Complete Guide to CSS Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
 
