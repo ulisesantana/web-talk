@@ -36,16 +36,12 @@
 
     <!--PRESENTACIÓN-->
     <web-slide data-transition="moveToLeft" class="base">
-      <img class="circle" src="img/ulises.jpg" alt="Ulises">
+      <img class="circle" src="img/Ulises.png" alt="Ulises">
       <h2 class="text-center">Ulises Santana</h2>
-      <small class="text-center">Promiscuo tecnológico</small>
+      <small class="text-center">Promiscuo tecnológico & Full Stack Developer en Kentech</small>
       <div class="row space">
         <a class="no-decoration" href="https://github.com/ulisesantana" target="_blank">
             <i class="fa fa-github fa-3x" aria-hidden="true"></i>
-            <small class="text-center">@ulisesantana</small>
-          </a>
-        <a class="no-decoration" href="https://medium.com/@ulisesantana" target="_blank">
-            <i class="fa fa-medium fa-3x" aria-hidden="true"></i>
             <small class="text-center">@ulisesantana</small>
           </a>
         <a class="no-decoration" href="https://twitter.com/ulisesantana" target="_blank">
@@ -271,26 +267,6 @@ img{
       </pre>
     </web-slide>
 
-    <!--CSS FILTERS SANDBOX 2-->
-    <web-slide data-transition="moveToLeft" class="css">
-      <pre is="lang-markup" theme="dark" sandbox>
-&lt;style>
-  .btn{
-    width: 100px; height: 25px; margin: 5px; 
-    cursor: pointer;
-    line-height: 1.8;
-    border-radius: 25px; border: 5px solid orange;
-    background-color: #ff6600;
-  }
-  .btn[disabled]{
-    filter: grayscale(100%); cursor: not-allowed;
-  }
-&lt;/style>
-&lt;div class="btn">&lt;small>ACTIVO&lt;/small>&lt;/div>
-&lt;div class="btn" disabled>&lt;small>INACTIVO&lt;/small>&lt;/div>
-      </pre>
-    </web-slide>
-
     <!--CSS CUSTOM PROPERTIES-->
     <web-slide data-transition="moveToLeft" class="css">
       <h2>CSS: Custom properties</h2>
@@ -306,27 +282,6 @@ img{
 &lt;/style>
 &lt;div>
   &lt;p>Gromenagüer&lt;/p>
-&lt;/div>
-      </pre>
-    </web-slide>
-
-    <!--CSS @APPLY-->
-    <web-slide data-transition="moveToLeft" class="css">
-      <pre is="lang-markup" theme="dark" sandbox>
-&lt;style>
-  :host {
-    --banner: {
-      background-color: yellowgreen;
-      border: 1px solid #000;
-      color: yellow;
-    };
-  }
-  .banner { 
-    @apply --banner; 
-  }
-&lt;/style>
-&lt;div class="banner">
-  &lt;h1>Gromenagüer&lt;/h1>
 &lt;/div>
       </pre>
     </web-slide>
@@ -474,58 +429,20 @@ img{
     <!--JS y la Web API-->
     <web-slide class="js" data-transition="moveToLeft">
       <h1>La Web API</h1>
-      <h3 data-enter="1">La batería está al <span id="battery"></span></h3>
+      <h3 data-enter="1">
+          La memoria de este dispositivo es ~<b id="ram">unknown</b> GiB.
+      </h3>
       <script data-enter="1">
-        navigator.getBattery().then(function (battery) {
-          var battery = battery.level * 100 + '%';
-          document.getElementById('battery').innerHTML = battery;
-        });
+        ram.innerHTML = navigator.deviceMemory || 'unknown'
       </script>
       <pre is="lang-javascript" theme="dark">
-&lt;h3>La batería está al &lt;span id="battery">&lt;/span>&lt;/h3>
-&lt;script>
-navigator.getBattery().then(function(battery){
-  var level = battery.level * 100 + '%';
-  document.getElementById('battery').innerHTML = level; 
-});
-&lt;/script>
+<h3>
+  La memoria de este dispositivo es ~<b id="ram"></b> GiB.
+</h3>
+<script>
+ram.innerHTML = navigator.deviceMemory || 'unknown'
+</script>
       </pre>
-    </web-slide>
-
-    <!--JS null-->
-    <web-slide class="js" data-transition="moveToLeft">
-      <h1>En Java todo es un objeto</h1>
-      <pre is="lang-javascript" theme="dark" example data-enter="1">
-console.log(typeof null);
-      </pre>
-      <h2 data-enter="2">Bitch please...</h2>
-      <pre is="lang-javascript" theme="dark" data-enter="2">
-> object
-      </pre>
-    </web-slide>
-
-    <!--JS Prototipos-->
-    <web-slide class="js" data-transition="moveToLeft">
-      <h2>Prototipos</h2>
-      <pre is="lang-javascript" theme="dark" example>
-String.prototype.firstUppercase = function() {
-  return this.charAt(0).toUpperCase() + this.slice(1);
-};
-
-console.log('javascript'.firstUppercase());
-      </pre>
-      <pre is="lang-javascript" theme="dark" data-enter="1">
-> Javascript
-      </pre>
-    </web-slide>
-
-    <web-slide class="js" data-transition="moveFromBottom">
-      <h1>Hacia dónde va JavaScript</h1>
-    </web-slide>
-
-    <!--JS hacia donde está yendo -->
-    <web-slide class="js" data-transition="moveToLeft">
-      <img class="no-resize" src="img/github-languages.png" alt="Lenguajes ordenados por repositorios en Github">
     </web-slide>
 
     <!--JS hacia donde está yendo -->
@@ -573,6 +490,7 @@ fs.readFile('../test.txt', 'utf8', (err, data) => {
 console.log('El contenido del fichero ' + 
             'de texto es: ' + text);
       </pre>
+        <a href="https://repl.it/@ulisesantana/Examples" target="_blank">Ejecutar ejemplo</a>
     </web-slide>
 
     <!--FULLSTACK JS-->
@@ -594,9 +512,6 @@ console.log('El contenido del fichero ' +
         <h3 data-enter="3">¿Qué implica ser un programador hoy en día?</h3>
         <h3 data-enter="4">La actitud es clave</h3>
       </div>
-      <!-- Qué tipo de empresa es Kentech, cómo trabajan, con qué trabajan y como coño llegue a ahí-->
-      <!-- Qué implica ser un programador hoy en día. Cómo es el sector -->
-      <!-- La actitud es muy importante -->
     </web-slide>
 
     <!--RECOMENDACIONES-->
@@ -607,7 +522,6 @@ console.log('El contenido del fichero ' +
           <h3 data-enter="1">Ir al menos a un Hackaton</h3>
           <h3 data-enter="2">Trastear en GitHub</h3>
           <h3 data-enter="3">Probar GitHub Pages</h3>
-          <h3 data-enter="4">Probar Heroku</h3>
           <h3 data-enter="5">Probar Firebase</h3>
         </div>
         <div class="col" data-enter="6">
@@ -631,8 +545,8 @@ console.log('El contenido del fichero ' +
           <a class="no-decoration" data-enter="2" href="https://github.com/bolshchikov/programmer-must-see">
             <h4>Vídeos de Programmer Must See</h4>
           </a>
-          <a class="no-decoration" data-enter="3" href="https://www.visualstudio.com/es/dev-essentials/?rr=https%3A%2F%2Fwww.google.es%2F">
-            <h4>PluralSight</h4>
+          <a class="no-decoration" data-enter="3" href="https://web.dev">
+            <h4>Web dev (Google)</h4>
           </a>
         </div>
         <div class="col">
